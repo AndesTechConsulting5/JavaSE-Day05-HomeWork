@@ -2,7 +2,7 @@ package org.andestech.learning.rfb19.g4.homework2;
 
 public abstract class Account {
 
-    private Customer customer;
+    protected Customer customer;
     private double balance;
     protected int accountId;
 
@@ -24,18 +24,19 @@ public abstract class Account {
         this.balance -= delta;
     }
 
-    //check
-    protected boolean checkDelta(String typeAccount, double delta, double MIN_DELTA, double MAX_DELTA){
+    //check delta
+    protected boolean checkDelta(String TYPE_ACCOUNT, double delta, double MIN_DELTA, double MAX_DELTA){
         if(delta >= MIN_DELTA && delta <= MAX_DELTA){
             return true;
         } else {
-            System.out.println("Attention! Wrong sum for " + typeAccount + " account.\n" +
-                               "Put and withdrawal for " + typeAccount + " sum should be between " + MIN_DELTA + " and " + MAX_DELTA + "\n" +
+            System.out.println("Attention! Wrong sum for " + TYPE_ACCOUNT + " account.\n" +
+                               "Put and withdrawal for " + TYPE_ACCOUNT + " sum should be between " + MIN_DELTA + " and " + MAX_DELTA + "\n" +
                                " actual sum = " + String.format("%.2f", delta));
             return false;
         }
     }
 
+    //check limit
     protected boolean checkLimit(String TYPE_ACCOUNT, double delta, double MIN_BALANCE, double MAX_BALANCE){
         if((balance - delta) >= MIN_BALANCE && (balance + delta) <= MAX_BALANCE){
             return true;
