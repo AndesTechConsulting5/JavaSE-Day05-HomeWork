@@ -35,7 +35,7 @@ public class CreditAccount extends Account {
         if(isDeltaValid(money)) {
             double balance = getBalance() - money;
             setBalance(balance);
-            System.out.println("Перевод со счет " + balance);
+            System.out.println("На счету " + balance);
         }
     }
 
@@ -45,7 +45,7 @@ public class CreditAccount extends Account {
         if(isDeltaValid(money)) {
             double balance = getBalance() + money;
             setBalance(balance);
-            System.out.println("Перевод на счет " + balance);
+            System.out.println("На счету " + balance);
         }
     }
 }

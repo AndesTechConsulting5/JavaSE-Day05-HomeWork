@@ -30,8 +30,13 @@ public class DebitAccount extends Account {
         System.out.println("Снимаем деньги с дебетового счета.");
         if(isDeltaValid(money)) {
             double balance = getBalance() - money;
-            setBalance(balance);
-            System.out.println("Перевод со счета " + balance);
+            if(balance>0) {
+                setBalance(balance);
+                System.out.println("На счету " + balance);
+            } else {
+                System.out.println("Снятие такой суммы невозможно!");
+            }
+
         }
     }
 
@@ -41,7 +46,7 @@ public class DebitAccount extends Account {
         if(isDeltaValid(money)) {
             double balance = getBalance() + money;
             setBalance(balance);
-            System.out.println("Перевод на счет " + balance);
+            System.out.println("На счету " + balance);
         }
     }
 

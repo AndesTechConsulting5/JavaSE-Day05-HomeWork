@@ -7,7 +7,7 @@ public abstract class Account {
     private Customer customer = new Customer();
 
     private static final double MAX_BALANCE = 1_400_000, MIN_BALANCE = -100_000,
-    DELTA_MIN = 100, DELTA_MAX = 10_000_000;
+    DELTA_MIN = 100, DELTA_MAX = 10_000;
 
 
     public Account() {
