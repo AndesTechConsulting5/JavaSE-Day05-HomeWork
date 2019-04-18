@@ -10,10 +10,10 @@ gitHub: https://github.com/AndesTechConsulting5/JavaSE-Day05-HomeWork.git
 Добавить абстрактные методы withdrawal, putMoney.
 (можно скопировать часть из предыдущей дом. работы)
 
-Создать классы счетов DebitAccount и CreditAccount как потомки Account.
+Создать классы счетов DebitAccount и org.andestech.learning.rfb19.g4.homework2.CreditAccount как потомки Account.
 Реализовать методы withdrawal, putMoney.
 
-Конструктор в классе CreditAccount сделать закрытым. Создание счёта сделать через фабричный метод.
+Конструктор в классе org.andestech.learning.rfb19.g4.homework2.CreditAccount сделать закрытым. Создание счёта сделать через фабричный метод.
 При этом в методе должна проверяться "кредитная история", возраст и в случае отказа 
 (несоответствия выбраннам параметрам - решите сами, каким),
 счёт создаваться не должен. 

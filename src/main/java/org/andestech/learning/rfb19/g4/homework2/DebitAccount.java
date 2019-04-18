@@ -18,7 +18,7 @@ public class DebitAccount extends Account {
             System.out.println("Возраст не подходит!");
             return null;
         } else {
-            System.out.println("Создание кредитного счета с балансом: " + balance);
+            System.out.println("Создание дебетового счета с балансом: " + balance);
             return new DebitAccount(id, balance, customer);
         }
     }
@@ -31,7 +31,7 @@ public class DebitAccount extends Account {
         if(isDeltaValid(money)) {
             double balance = getBalance() - money;
             setBalance(balance);
-            System.out.println("На счету " + balance);
+            System.out.println("Перевод со счета " + balance);
         }
     }
 
@@ -41,7 +41,7 @@ public class DebitAccount extends Account {
         if(isDeltaValid(money)) {
             double balance = getBalance() + money;
             setBalance(balance);
-            System.out.println("На счету " + balance);
+            System.out.println("Перевод на счет " + balance);
         }
     }
 

@@ -1,5 +1,4 @@
-import org.andestech.learning.rfb19.g4.homework2.Account;
-import org.andestech.learning.rfb19.g4.homework2.Customer;
+package org.andestech.learning.rfb19.g4.homework2;
 
 public class CreditAccount extends Account {
 
@@ -11,6 +10,7 @@ public class CreditAccount extends Account {
     }
 
 
+    public static CreditAccount create() {return new CreditAccount();}
 
     //фабричный метод
     public static CreditAccount createAccount(int id, double balance, Customer customer) {
@@ -21,7 +21,7 @@ public class CreditAccount extends Account {
             System.out.println("Отрицательный баланс!");
             return null;
         } else {
-            System.out.println("Создание кредитного счета.");
+            System.out.println("Создание кредитного счета с балансом:" + balance);
             return new CreditAccount(id, balance, customer);
         }
     }
@@ -35,7 +35,7 @@ public class CreditAccount extends Account {
         if(isDeltaValid(money)) {
             double balance = getBalance() - money;
             setBalance(balance);
-            System.out.println("На счету " + balance);
+            System.out.println("Перевод со счет " + balance);
         }
     }
 
@@ -45,7 +45,7 @@ public class CreditAccount extends Account {
         if(isDeltaValid(money)) {
             double balance = getBalance() + money;
             setBalance(balance);
-            System.out.println("На счету " + balance);
+            System.out.println("Перевод на счет " + balance);
         }
     }
 }
