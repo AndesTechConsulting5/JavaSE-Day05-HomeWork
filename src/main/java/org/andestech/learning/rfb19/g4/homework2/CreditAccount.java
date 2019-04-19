@@ -31,7 +31,7 @@ public class CreditAccount extends Account implements New_Account {
         }
     }
 
-    //закрытый конструктор
+    //закрытый конструктор123
     private CreditAccount(Customer customer, double balance) {
         super(customer,balance);
 }
