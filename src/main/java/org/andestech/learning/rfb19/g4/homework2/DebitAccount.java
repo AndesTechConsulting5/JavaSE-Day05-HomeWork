@@ -19,7 +19,7 @@ public class DebitAccount extends Account {
             setBalance(getBalance() - cash);
             System.out.println(" withdrawal OK");
         } else {
-            System.out.println(" withdrawal OK");
+            System.out.println(" withdrawal not OK");
         }
     }
 

@@ -7,6 +7,9 @@ public class CreditAccount extends Account {
     private static final double LIM_CRD_IN = 400, LIM_CRD_REST = 10, LIM_CRD_EXC = 50000;
 
 
+
+
+
     // constructor
     private CreditAccount(int accountId, double balance, Customer customer) {
         super(accountId, balance, customer);
@@ -14,12 +17,12 @@ public class CreditAccount extends Account {
 
 
 
-    static CreditAccount create( int accountId, double balance, Customer customer ) {
+    static CreditAccount create(int accountId, double balance, Customer customer ) {
         if (customer.getAge() > MIN_AGE && customer.isHistory()) {
-            System.out.println("Creating account");
+            System.out.println("Creating CREDIT account");
             return new CreditAccount(accountId, balance, customer);
         } else {
-            System.out.println("Age is out of range OR History");
+            System.out.println("Age is out of range OR History for creating credit account");
             return null;
         }
     }
