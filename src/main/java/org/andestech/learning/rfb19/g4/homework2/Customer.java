@@ -32,6 +32,9 @@ public class Customer {
         return history;
     }
 
+
+
+
     // ---------- SETTER
     public void setAge(int age) {
         this.age = age;
@@ -52,6 +55,8 @@ public class Customer {
     public void setAddress(String address) {
         this.address = address;
     }
+
+
 
     public Customer(String firstName, String secondName, int age, String address, boolean history) {
         this.firstName = firstName;

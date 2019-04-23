@@ -4,17 +4,15 @@ public class CreditAccount extends Account {
 
     private static final double MIN_AGE = 18;
 
-    private static final double LIM_CRD_IN = 400, LIM_CRD_REST = 10, LIM_CRD_EXC = 50000;
-
-
+    private static final double LIM_CRD_WDR = 400, LIM_CRD_REST = 10, LIM_CRD_EXC = 50000;
 
 
 
     // constructor
+
     private CreditAccount(int accountId, double balance, Customer customer) {
         super(accountId, balance, customer);
     }
-
 
 
     static CreditAccount create(int accountId, double balance, Customer customer ) {
@@ -22,7 +20,7 @@ public class CreditAccount extends Account {
             System.out.println("Creating CREDIT account");
             return new CreditAccount(accountId, balance, customer);
         } else {
-            System.out.println("Age is out of range OR History for creating credit account");
+            System.out.println("Age is out of range or History for creating credit account");
             return null;
         }
     }
@@ -32,10 +30,28 @@ public class CreditAccount extends Account {
     @Override
     public void withdrawal(double cash) {
 
+        if ((cash < LIM_CRD_WDR) && (getBalance() - cash > LIM_CRD_REST) ) {
+
+            setBalance(getBalance() - cash);
+            System.out.println(" [INFO] [CREDIT] withdrawal OK" + " balance setted to --> " + getBalance() );
+        } else {
+            System.out.println(" [ERROR] [CREDIT] withdrawal is not OK");
+        }
+
     }
 
     @Override
     public void putMoney(double cash) {
+
+        if ( getBalance() + cash < LIM_CRD_EXC ) {
+
+            setBalance( getBalance() + cash );
+            System.out.println(" [INFO] [CREDIT] putting is OK, your balance is " + getBalance() );
+
+        } else {
+            System.out.println(" [INFO] [CREDIT] putting isn't OK, your balance is " + getBalance() );
+        }
+
 
     }
 

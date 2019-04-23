@@ -2,24 +2,28 @@ package org.andestech.learning.rfb19.g4.homework2;
 
 public class DebitAccount extends Account {
 
-    private static final double LIM_DBT_IN = 500;  // лимит снятия
+    private static final double LIM_DBT_WDR  = 500;  // лимит снятия
     private static final double LIM_DBT_REST = 50; // лимит остатка
-    private static final double LIM_DBT_EXC = 10000; // лимит избытка
+    private static final double LIM_DBT_EXC  = 10000; // лимит избытка
 
     // constructor
     public DebitAccount(int accountId, double balance, Customer customer) {
         super(accountId, balance, customer);
+
+        System.out.println("Creating DEBIT account");
+        System.out.println("Your balance is " + getBalance());
     }
 
     @Override
     public void withdrawal(double cash) {
 
-        if ((cash < LIM_DBT_IN) && (getBalance() - cash > LIM_DBT_REST) && (getBalance() + cash < LIM_DBT_EXC)) {
+        // менее лимита снятия и более лимита остатка
+        if ((cash < LIM_DBT_WDR) && (getBalance() - cash > LIM_DBT_REST) ) {
 
             setBalance(getBalance() - cash);
-            System.out.println(" withdrawal OK");
+            System.out.println(" [INFO] [DEBIT] withdrawal OK, balance setted to --> " + getBalance() );
         } else {
-            System.out.println(" withdrawal not OK");
+            System.out.println(" [ERROR] [DEBIT] withdrawal not succeful");
         }
     }
 
@@ -30,37 +34,18 @@ public class DebitAccount extends Account {
     @Override
     public void putMoney(double cash) {
 
-        setBalance( getBalance() + cash );
+        // не более лимита избытка
+        if ( cash + getBalance() < LIM_DBT_EXC ){
+            setBalance( getBalance() + cash );
+            System.out.println(" [INFO] [DEBIT] putting money OK, balance setted to --> " + getBalance() );
+
+        } else {
+            System.out.println(" [ERROR] [DEBIT] putting money isn't succeful");
+        }
+
+
     }
 
 
 
 }
-
-
-
-
-
-
-/*
-
-    public boolean isDeltaValid (double delta){
-        return isDeltaValid ;
-    }
-
-
-    public void setBalance (double balance){
-
-        this.balance = balance;
-    }
-    /*
-
-     Реализовать методы withdrawal, putMoney.
-
-     Конструктор в классе DebitAccount сделать открытым.
-
-     Создать закрытые статические поля (константные) в классах счетов,
-     определяющие лимиты по снятию средств, а также лимиты по остаткам и избыткам.
-
-     */
-
