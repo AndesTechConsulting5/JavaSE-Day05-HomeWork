@@ -48,12 +48,12 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" +
-                "firstName='" + firstName + '\'' +
-                ", secondName='" + secondName + '\'' +
-                ", address='" + address + '\'' +
-                ", age=" + age +
-                '}';
+        return "Клиент [" +
+                "Имя = '" + firstName + '\'' +
+                ", Фамилия = '" + secondName + '\'' +
+                ", Адрес = '" + address + '\'' +
+                ", Возраст = " + age +
+                ']';
     }
 }
 

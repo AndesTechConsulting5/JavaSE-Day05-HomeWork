@@ -1,13 +1,14 @@
 package org.andestech.learning.rfb19.g4.homework2;
 
+
 public abstract class Account {
     private Customer customer;
-    private float balance;
+    private double balance;
     private int accountId;
 
     public Customer getCustomer() {return customer;}
 
-    public float getBalance() {
+    public double getBalance() {
         return balance;
     }
 
@@ -19,15 +20,14 @@ public abstract class Account {
         this.customer = customer;
     }
 
-    public void setBalance(float balance) {
-        this.balance = balance;
-    }
+    public void setBalance(double balance) { this.balance = balance; }
 
     public void setAccountId(int accountId) {
         this.accountId = accountId;
     }
 
-    public abstract float withdrawal(float money);
 
-    public abstract float putMoney(float money);
+    public abstract double withdrawal(double money);
+
+    public abstract double putMoney(double money);
 }
