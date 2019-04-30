@@ -4,10 +4,6 @@ import java.util.Random;
 
 public class CreditAccount extends Account {
 
-    static final double LIMIT_LOW = 1_000;
-    static final double LIMIT_HIGH = 1_000_000;
-    static final double LIMIT_WITHDRAWAL = 20_000;
-
     private CreditAccount(int accountId, Customer customer, double balance) {
         this.accType = AccountType.CreditAccount;
         this.setAccountId(accountId);
@@ -17,19 +13,19 @@ public class CreditAccount extends Account {
 
     public static CreditAccount createAccount(int accountId, Customer customer, double balance) {
         if (customer.getAge() < 18 || customer.getAge() > 65) {
-            System.out.printf("Account ID: %d Несоответствие возраста! %s balance: %,.2f\n", accountId, customer, balance);
+            System.out.printf("Account ID: [%d] Несоответствие возраста! balance: [%,.2f] %s\n", accountId, balance, customer);
             return null;
         }
         if (!customer.isCreditHistoryGood()) {
-            System.out.printf("Account ID: %d Плохая кредитная история! %s balance: %,.2f\n", accountId, customer, balance);
+            System.out.printf("Account ID: [%d] Плохая кредитная история! balance: [%,.2f] %s\n", accountId, balance, customer);
             return null;
         }
-        if (balance < CreditAccount.LIMIT_LOW || balance > CreditAccount.LIMIT_HIGH) {
-            System.out.printf("Account ID: %d Недопустимый баланс! %s balance: %,.2f\n", accountId, customer, balance);
+        if (balance < AccountType.CreditAccount.getLimitLow() || balance > AccountType.CreditAccount.getLimitHigh()) {
+            System.out.printf("Account ID: [%d] Недопустимый баланс! balance: [%,.2f] %s\n", accountId, balance, customer);
             return null;
         }
         if (accountId < 1) {
-            System.out.printf("Account ID: %d Недопустимый ID! %s balance: %,.2f\n", accountId, customer, balance);
+            System.out.printf("Account ID: [%d] Недопустимый ID! balance: [%,.2f] %s\n", accountId, balance, customer);
             return null;
         }
 
@@ -47,7 +43,7 @@ public class CreditAccount extends Account {
 
     @Override
     public boolean putMoney(double amount) {
-        if (!checkPutMoney(amount, this.getAccType()))
+        if (!checkPutMoney(amount))
             return false;
 
         setBalance(getBalance() + amount);
@@ -56,6 +52,6 @@ public class CreditAccount extends Account {
 
     @Override
     public String toString() {
-        return this.accType + " " + super.toString();
+        return "{" + accType + " " + super.toString() + "}";
     }
 }

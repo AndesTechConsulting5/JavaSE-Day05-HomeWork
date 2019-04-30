@@ -68,6 +68,6 @@ public class Customer {
 
     @Override
     public String toString() {
-        return String.format("Customer: %s, %s age: %d isCreditHistoryGood: %b address: %s", secondName, firstName, age, isCreditHistoryGood, address);
+        return String.format("{Customer: [%s, %s] age: [%d] isCreditHistoryGood: [%b] address: [%s]}", secondName, firstName, age, isCreditHistoryGood, address);
     }
 }

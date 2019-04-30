@@ -1,7 +1,5 @@
 package org.andestech.learning.rfb19.g4.homework2;
 
-enum AccountType { DebitAccount, CreditAccount}
-
 public abstract class Account {
     private int accountId;
     private double balance;
@@ -42,21 +40,14 @@ public abstract class Account {
 
     @Override
     public String toString() {
-        return String.format("ID: %d balance: %,.2f %s", accountId, balance, customer);
+        return String.format("ID: [%d] balance: [%,.2f] [%s]", accountId, balance, customer);
     }
 
     public boolean checkLimits(double balance) {
-        double limitLow = 0, limitHigh = 0;
+        double limitLow, limitHigh;
 
-        switch (accType) {
-            case DebitAccount:
-                limitLow = DebitAccount.LIMIT_LOW;
-                limitHigh = DebitAccount.LIMIT_HIGH;
-                break;
-            case CreditAccount:
-                limitLow = CreditAccount.LIMIT_LOW;
-                limitHigh = CreditAccount.LIMIT_HIGH;
-        }
+        limitLow = accType.getLimitLow();
+        limitHigh = accType.getLimitHigh();
 
         if (balance <  limitLow) {
             System.out.printf("Остаток упадет ниже минимума (%,.2f). Операция отклонена! %s\n", balance, this);
@@ -71,9 +62,7 @@ public abstract class Account {
     }
 
     public boolean checkWithdrawal(double amount, AccountType accType) {
-        double limitWithdrawal = (accType == AccountType.DebitAccount) ?
-                DebitAccount.LIMIT_WITHDRAWAL :
-                CreditAccount.LIMIT_WITHDRAWAL;
+        double limitWithdrawal = accType.getLimitWithdrawal();
 
         if (amount > limitWithdrawal) {
             System.out.printf("Превышен лимит снятия средств (%,.2f). Операция отклонена! %s\n", amount, this);
@@ -83,7 +72,7 @@ public abstract class Account {
         return checkLimits(balance - amount);
     }
 
-    public boolean checkPutMoney(double amount, AccountType accType) {
+    public boolean checkPutMoney(double amount) {
         return checkLimits(balance + amount);
     }
 }

@@ -2,10 +2,6 @@ package org.andestech.learning.rfb19.g4.homework2;
 
 public class DebitAccount extends Account {
 
-    static final double LIMIT_LOW = 0;
-    static final double LIMIT_HIGH = 10_000_000;
-    static final double LIMIT_WITHDRAWAL = 30_000;
-
     public DebitAccount(int accountId, Customer customer, double balance) {
         this.accType = AccountType.DebitAccount;
         this.setAccountId(accountId);
@@ -28,7 +24,7 @@ public class DebitAccount extends Account {
 
     @Override
     public boolean putMoney(double amount) {
-        if (!checkPutMoney(amount, this.getAccType()))
+        if (!checkPutMoney(amount))
             return false;
 
         setBalance(getBalance() + amount);
@@ -37,6 +33,6 @@ public class DebitAccount extends Account {
 
     @Override
     public String toString() {
-        return this.accType + " " + super.toString();
+        return "{" + accType + " " + super.toString() + "}";
     }
 }
