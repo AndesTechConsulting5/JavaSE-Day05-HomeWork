@@ -2,37 +2,34 @@ package org.andestech.learning.rfb19.g4.homework2;
 
 public class CreditAccount extends Account {
 
-    private static final String TYPE_ACCOUNT = "credit";
     private static final int MIN_AGE = 14;
-    private static final double MIN_DELTA = 0,
-                                MAX_DELTA = 10_000,
-                                MIN_BALANCE = -1_000,
-                                MAX_BALANCE = 50_000;
 
-    private CreditAccount(Customer customer, double balance, int accountId) {
-        super(customer, balance, accountId);
+    private CreditAccount(int accountId, Customer customer, double balance) {
+        this.accType = AccType.CreditAccount;
+        this.setAccountId(accountId);
+        this.setCustomer(customer);
+        this.setBalance(balance);
     }
 
     public static CreditAccount createCreditAccount(boolean isCreditHistoryCorrect, int customerAge, Customer customer, double balance, int accountId){
-        if(isCreditHistoryCorrect && customerAge >= MIN_AGE){
-            return new CreditAccount(customer, balance, accountId);
-        } else {
+        if(isCreditHistoryCorrect && customerAge <= MIN_AGE){
             System.out.println("Can't open credit account because credit history or age is not valid!\n" + "credit history = " + isCreditHistoryCorrect + " age = " + customerAge);
             return null;
         }
+        return new CreditAccount(accountId, customer, balance);
     }
 
     @Override
-    public void putMoney(double delta) {
-        if (checkDelta(TYPE_ACCOUNT, delta, MIN_DELTA, MAX_DELTA) && checkLimit(TYPE_ACCOUNT, delta, MIN_BALANCE, MAX_BALANCE)){
-            super.putMoney(delta);
+    public void putMoney(double sum) {
+        if (checkDelta(sum) && checkLimit(getBalance() + sum)){
+            super.putMoney(sum);
         }
     }
 
     @Override
-    public void withdrawal(double delta) {
-        if (checkDelta(TYPE_ACCOUNT, delta, MIN_DELTA, MAX_DELTA) && checkLimit(TYPE_ACCOUNT, delta, MIN_BALANCE, MAX_BALANCE)){
-            super.withdrawal(delta);
+    public void withdrawal(double sum) {
+        if (checkDelta(sum) && checkLimit(getBalance() - sum)){
+            super.withdrawal(sum);
         }
     }
 }

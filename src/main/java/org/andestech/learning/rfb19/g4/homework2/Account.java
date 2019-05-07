@@ -2,14 +2,34 @@ package org.andestech.learning.rfb19.g4.homework2;
 
 public abstract class Account {
 
-    protected Customer customer;
+    private int accountId;
+    private Customer customer;
     private double balance;
-    protected int accountId;
+    protected AccType accType;
 
-    public Account(Customer customer, double balance, int accountId) {
-        this.customer = customer;
-        this.balance = balance;
+    public int getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(int accountId) {
         this.accountId = accountId;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public void setBalance(double balance) {
+        if (checkLimit(balance))
+        this.balance = balance;
+    }
+
+    public AccType getAccType(){
+        return accType;
     }
 
     public double getBalance() {
@@ -24,27 +44,36 @@ public abstract class Account {
         this.balance -= delta;
     }
 
-    //check delta
-    protected boolean checkDelta(String TYPE_ACCOUNT, double delta, double MIN_DELTA, double MAX_DELTA){
-        if(delta >= MIN_DELTA && delta <= MAX_DELTA){
-            return true;
-        } else {
-            System.out.println("Attention! Wrong sum for " + TYPE_ACCOUNT + " account.\n" +
-                               "Put and withdrawal for " + TYPE_ACCOUNT + " sum should be between " + MIN_DELTA + " and " + MAX_DELTA + "\n" +
-                               " actual sum = " + String.format("%.2f", delta));
+    //check limit
+    protected boolean checkLimit(double amount){
+        double minLimit = accType.getMinLimit();
+        double maxLimit = accType.getMaxLimit();
+
+        if(amount < minLimit){
+            System.out.println("For " + getAccType() + " limit less than minimum.\n" +
+                               " min limit = " + accType.getMinLimit() + "\n" +
+                               "Actual balance = " + balance + " actual amount = " + String.format("%.2f", amount));
             return false;
         }
+        else if (amount > maxLimit){
+            System.out.println("For " + getAccType() + " limit more than maximum.\n" +
+                               " max limit = " + accType.getMaxLimit() + "\n" +
+                               "Actual balance = " + balance + " actual amount = " + String.format("%.2f", amount));
+            return false;
+        }
+        else {return true;}
     }
 
-    //check limit
-    protected boolean checkLimit(String TYPE_ACCOUNT, double delta, double MIN_BALANCE, double MAX_BALANCE){
-        if((balance - delta) >= MIN_BALANCE && (balance + delta) <= MAX_BALANCE){
-            return true;
-        } else {
-            System.out.println("Attention! Limit is over for " + TYPE_ACCOUNT + " account.\n" +
-                               "Limit of " + TYPE_ACCOUNT + " account should be between " + MIN_BALANCE + " and " + String.format("%.2f", MAX_BALANCE) + "\n" +
-                               " actual balance = " + balance + " you delta = " + String.format("%.2f", delta));
+    //check delta
+    protected boolean checkDelta(double delta){
+        double accDelta = accType.getAccDelta();
+
+        if(delta > accDelta){
+            System.out.println("Put and withdrawal sum for " + getAccType() + " should be less than " + accType.getAccDelta() + "\n" +
+                               " actual sum = " + String.format("%.2f", delta));
             return false;
+        } else {
+            return true;
         }
     }
 
